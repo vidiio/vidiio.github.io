@@ -19,21 +19,9 @@
     <div id="wrap" style="margin: 0 auto; display: table; width: 1350px;">
       <div style="float: left; margin: 15px;">
         <div id="player1"></div>
-        <div class="panel panel-default" style="margin-bottom: -30px;">
-          <div class="panel-heading">Video Player 1's Publish Stream:</div>
-          <div id="channel1" class="panel-body console" style="height: 100px; overflow: auto;">
-
-          </div>
-        </div>
       </div>
       <div style="float: left; margin: 15px;">
         <div id="player2"></div>
-        <div class="panel panel-default" style="margin-bottom: -30px;">
-          <div class="panel-heading">Video Player 2's Publish Stream:</div>
-          <div id="channel2" class="panel-body console" style="height: 100px; overflow: auto;">
-
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -44,20 +32,6 @@
   <script src="./videosync.js"></script>
 
   <script>
-    var consolePrint = function(msg) {
-      var divId = "channel1";
-      if (msg.sender === "Player2") {
-        divId = "channel2";
-      }
-      var time = msg.time;
-      if (time === null) {
-        $("#" + divId).prepend("{type: " + msg.type + "}<br>");
-      }
-      else {
-        $("#" + divId).prepend("{type: " + msg.type + ", time: " + time + "}<br>");
-      }
-    };
-
     var tag = document.createElement('script');
 
     tag.src = "https://www.youtube.com/iframe_api";
@@ -115,33 +89,6 @@
       callback: consolePrint
     });
   </script>
-  <script type="text/javascript">
-    /* <![CDATA[ */
-    var google_conversion_id = 1009365105;
-    var google_custom_params = window.google_tag_params;
-    var google_remarketing_only = true;
-    /* ]]> */
-  </script>
-  <script type="text/javascript" src="./assets/conversion.js">
-  </script>
-  <iframe name="google_conversion_frame" title="Google conversion frame" width="300" height="13" src="./assets/saved_resource.html" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" style="display: none !important;">&lt;img height="1" width="1" border="0" alt="" src="http://googleads.g.doubleclick.net/pagead/viewthroughconversion/1009365105/?frame=0&amp;random=1404231211816&amp;cv=7&amp;fst=1404231211816&amp;num=1&amp;fmt=1&amp;guid=ON&amp;u_h=1440&amp;u_w=2560&amp;u_ah=1418&amp;u_aw=2560&amp;u_cd=24&amp;u_his=1&amp;u_tz=-420&amp;u_java=true&amp;u_nplug=14&amp;u_nmime=72&amp;frm=0&amp;url=http%3A//www.pubnub.com/style-guide/demo-template/&amp;ref=http%3A//getpocket.com/a/queue/" /&gt;</iframe>
-  <noscript>
-    &lt;div style="display:inline;"&gt; &lt;img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1009365105/?value=0&amp;amp;guid=ON&amp;amp;script=0"/&gt; &lt;/div&gt;
-  </noscript>
-  <script type="text/javascript">
-    var bf_url = "pubnub";
-    (function () {
-      var e = document.createElement("script");
-      e.type = "text/javascript";
-      e.async = !0;
-      e.src = "//d2sdf28wg0skh3.cloudfront.net/bf.min.js";
-      var t = document.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(e, t)
-    })();
-  </script>
-
-
-  <script type="text/javascript" src="chrome-extension://bmdblncegkenkacieihfhpjfppoconhi/in-page-script.js"></script>
 </body>
 
 </html>
