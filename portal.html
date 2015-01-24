@@ -25,12 +25,13 @@
   <script src="./videosync.js"></script>
 
   <script>
-    var url = 'A9HV5O8Un6k';
+    var vidid = 'A9HV5O8Un6k';
+
     $('#url').keypress(function(e) {
-      if(e == 13) {
-        var link = document.getElementById('url').val();
-        url = link.substring(link.indexOf('='));
-        alert('url');
+      if(e.keyCode == 13) {
+        var match = $('#url').val().match(/[?&]v=([^&]+)/);
+        vidid = match[1];
+        player1.loadVideoById(vidid);
       }
     });
 
@@ -47,7 +48,7 @@
       fs: 0
     };
 
-    var user = "User" + Math.random().toString();
+    var user = "User" + Math.random().toString(); // set username
     var vidSync1 = new VideoSync("demo", user);
     var player1;
 
@@ -55,7 +56,7 @@
       player1 = new YT.Player('player1', {
         height: '390',
         width: '640',
-        videoId: url,
+        videoId: vidid,
         playerVars: playerVars,
         events: {
           'onReady': vidSync1.onPlayerReady,

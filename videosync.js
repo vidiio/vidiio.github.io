@@ -20,8 +20,8 @@ function VideoSync(roomId, userId) {
 
     // Initializing PubNub with demo keys and our userId.
     var pubnub = PUBNUB.init({
-        publish_key: 'pub-c-242fbbf1-4cc6-4153-8f20-a671697f15ec',
-        subscribe_key: 'sub-c-2361676c-1e85-11e4-bbbf-02ee2ddab7fe',
+        publish_key: 'pub-c-8ca801fc-d70a-4a96-b09a-250ca597a6e9',
+        subscribe_key: 'sub-c-09c251d0-a40f-11e4-a3fb-0619f8945a4f',
         uuid: userId
     });
 
@@ -32,7 +32,7 @@ function VideoSync(roomId, userId) {
     var lastMsg;
 
     // A helper function that publishes state-change messages.
-    var pub = function (type, time) {
+    var pub = function (type, time, videoId) {
         if (lastMsg !== "" + type + time) {
             pubnub.publish({
                 channel: roomId,
@@ -41,6 +41,7 @@ function VideoSync(roomId, userId) {
                     sender: userId,
                     type: type,
                     time: time,
+                    videoId: videoId
                 }
             });
         }
@@ -60,22 +61,35 @@ function VideoSync(roomId, userId) {
             callback: function (m) {
                 lastMsg = m.recipient + m.type + m.time;
                 if ((m.recipient === userId || m.recipient === "") && m.sender !== userId) {
+                    var url = player.getVideoUrl().match(/[?&]v=([^&]+)/);
+                    var vidid = url[1];
+                
                     if (m.type === "updateRequest") {
                         var curState = player.getPlayerState();
                         var curTime = player.getCurrentTime();
+
                         pubnub.publish({
                             channel: roomId,
                             message: {
                                 type: "updateResponse",
                                 time: curTime,
-                                recipient: m.sender
+                                recipient: m.sender,
+                                videoId: vidid
                             }
                         });
                     } else if (m.type === "pause") {
+                        if (m.videoId !== vidid)
+                        {
+                            player.loadVideoById(m.videoId);
+                        }
                         player.seekTo(m.time, true);
                         time = m.time;
                         player.pauseVideo();
                     } else if (m.type === "play") {
+                        if (m.videoId !== vidid)
+                        {
+                            player.loadVideoById(m.videoId);
+                        }
                         if (m.time !== null) {
                             player.seekTo(m.time, true);
                         }
@@ -115,14 +129,17 @@ function VideoSync(roomId, userId) {
         },
         // Should be bound to the YouTube player `onStateChange` event.
         onPlayerStateChange: function (event) {
+            var url = player.getVideoUrl().match(/[?&]v=([^&]+)/);
+            var vidid = url[1];
+
             if (linkStart) {
                 // Play event.
                 if (event.data === 1) {
-                    pub("play", null);
+                    pub("play", null, vidid);
                 }
                 // Pause event.
                 else if (event.data === 2) {
-                    pub("pause", player.getCurrentTime());
+                    pub("pause", player.getCurrentTime(), vidid);
                 }
             }
         }
