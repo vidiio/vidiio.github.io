@@ -88,9 +88,8 @@ function VideoSync(roomId, userId) {
                         if (m.videoId !== vidid) {
                             player.loadVideoById(m.videoId);
                         }
-                        if (m.time !== null) {
-                            player.seekTo(m.time, true);
-                        }
+                        player.seekTo(m.time, true);
+                        time = m.time;
                         player.playVideo();
                     }
                 }
@@ -136,7 +135,7 @@ function VideoSync(roomId, userId) {
             if (linkStart) {
                 // Play event.
                 if (event.data === 1) {
-                    pub("play", null, vidid);
+                    pub("play", player.getCurrentTime(), vidid);
                 }
                 // Pause event.
                 else if (event.data === 2) {
