@@ -39,19 +39,23 @@
 
   <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript">
-    $('#submit').click(function() {
-      var user = $('#user').val().trim();
-      var room = $('#room').val().trim();
+    if(typeof(Storage) !== "undefined") {
+      $('#submit').click(function() {
+        var user = $('#user').val().trim();
+        var room = $('#room').val().trim();
 
-      if ( user !== '' && room !== '' ) {
-        localStorage.setItem("user", user);
-        localStorage.setItem("room", room);
-        window.location = 'http://vidiio.github.io/portal.html';
-      }
-      else {
-        alert('Please fill out all fields.');
-      }
-    });
+        if ( user !== '' && room !== '' ) {
+          sessionStorage.user = user;
+          sessionStorage.room = room;
+          window.location = 'http://vidiio.github.io/portal.html';
+        }
+        else {
+          alert('Please fill out all fields.');
+        }
+      });
+    } else {
+      alert("Sorry, your browser does not support web storage...");
+    }
   </script>
 </body>
 </html>
