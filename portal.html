@@ -52,8 +52,8 @@
       fs: 0
     };
 
-    var user = localstorage.user; // set username
-    var vidSync1 = new VideoSync(localstorage.room, user);
+    var user = localstorage.getItem('user'); // set username
+    var vidSync1 = new VideoSync(localstorage.getItem('room'), user);
     var player1;
 
     function onYouTubeIframeAPIReady() {
@@ -76,7 +76,7 @@
     });
 
     pubnub.subscribe({
-      channel: localstorage.room,
+      channel: localstorage.getItem('room'),
       callback: consolePrint
     });
   </script>
