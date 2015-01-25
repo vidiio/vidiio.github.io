@@ -19,11 +19,25 @@
 
   <input type="text" id="url">
 
+  <section id="main">
+    <canvas id="drawCanvas" width="300" height="300">Canvas is not supported on this browser!</canvas>
+
+    <section id="colorSwatch">
+      <input type="radio" name="color" id="color01" data-color="gold" checked><label for="color01"></label> 
+      <input type="radio" name="color" id="color02" data-color="darkorange">  <label for="color02"></label>  
+      <input type="radio" name="color" id="color03" data-color="navy">    <label for="color03"></label>  
+      <input type="radio" name="color" id="color04" data-color="yellowgreen"> <label for="color04"></label>  
+      <input type="radio" name="color" id="color05" data-color="firebrick"> <label for="color05"></label>  
+      <input type="radio" name="color" id="color06" data-color="powderblue">  <label for="color06"></label>
+      <input type="button" value="clear" id="clear">
+    </section>
+  </section>
+
   <script src="./assets/pubnub.min.js"></script>
   <script src="./assets/main.js"></script>
   <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="./videosync.js"></script>
-
+  <script src="./app.js"></script>
   <script>
     var vidid = 'A9HV5O8Un6k';
 
@@ -52,8 +66,10 @@
       fs: 0
     };
 
-    var user = sessionStorage.user; // set username
-    var vidSync1 = new VideoSync(sessionStorage.room, user);
+    //var user = sessionStorage.user; // set username
+    var user ="asdf" + Math.random().toString();
+    //var vidSync1 = new VideoSync(sessionStorage.room, user);
+    var vidSync1 = new VideoSync("demo", user);
     var player1;
 
     function onYouTubeIframeAPIReady() {
@@ -73,11 +89,6 @@
       publish_key: 'pub-c-8ca801fc-d70a-4a96-b09a-250ca597a6e9',
       subscribe_key: 'sub-c-09c251d0-a40f-11e4-a3fb-0619f8945a4f',
       uuid: user
-    });
-
-    pubnub.subscribe({
-      channel: sessionStorage.room,
-      callback: consolePrint
     });
   </script>
 </body>
