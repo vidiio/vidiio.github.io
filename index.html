@@ -10,37 +10,29 @@
         <title>Vidiio - Video Collaborate in Real Time</title>
         <link rel = "stylesheet" type = "text/css" href = "1140.css"/>
         <link rel = "stylesheet" type = "text/css" href = "styles.css"/>
+
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     </head>
 <body class = "sourcesans">
-  <div class = "header">
-        <div class = "header-content">
-          <div class = "nav">
-            <ul>
-              <li class = "logo-button"><a href = "#"><img class = "logo" src = "matreepics/logonobg3.png"/></a></li>
-              <li><a class = "sourcesans" href = "#">Contact</a></li>
-              <li><a class = "sourcesans" href = "#">Features</a></li>
-              <li><a class = "sourcesans" href = "#">About</a></li>
-              <li><a class = "sourcesans" href = "#">Home</a></li>
-            </ul>
+  <div id="splash">
+    <div class="container12 blockingcontainter panel1">
+      <img src="images/logo.png" id="logo">
+      <h1 class = "sourcesans" id="home">Experience real time video collaboration.</h1>
+      <form action="" method="POST">    
+        <div class="row">
+          <div class="column4">
+            <input type="text" class="large-fld" name="user" id="user" value="" placeholder="Username" maxlength="10">
+          </div>
+          <div class="column5">
+            <input type="text" class="large-fld" name="room" id="room" value="" placeholder="Channel Name" maxlength="10">
+          </div>
+          <div class="column3">
+            <button type="button" id="submit" class="large-btn large-magnify">Get Started!</a></button>
           </div>
         </div>
-     </div>
-  <div class="container12 blockingcontainter panel1">
-    <h1 class = "sourcesans" id="home">Experience real time video collaboration</h1>
-    <form action="" method="POST">    
-      <div class="row">
-        <div class="column4">
-          <input type="text" class="large-fld" name="user" id="user" value="" placeholder="Username" maxlength="10">
-        </div>
-        <div class="column5">
-          <input type="text" class="large-fld" name="room" id="room" value="" placeholder="Channel Name" maxlength="10">
-        </div>
-        <div class="column3">
-          <button type="button" id="submit" class="large-btn large-magnify">Get Started!</a></button>
-        </div>
-      </div>
-    </form>
-    <p id="home-info"></p>
+      </form>
+    </div>
   </div>
   <div class = "seperate"></div>
   <div class = "container blockingcontainer panel2">
