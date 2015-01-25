@@ -32,7 +32,7 @@
 
 	/* PubNub */
 
-	var channel = 'demo'; // update channel
+	var channel = sessionStorage.room; // update channel
 
 	var pubnub = PUBNUB.init({
 		publish_key     : 'pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695',

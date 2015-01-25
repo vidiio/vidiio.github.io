@@ -2,14 +2,12 @@
 <html data-ember-extension="1">
 <!--<![endif]-->
 
-<!--
 <script type="text/javascript">
   if (sessionStorage.room == null || sessionStorage.user == null)
   {
     window.location = 'http://vidiio.github.io/index.html';
   }
 </script>
--->
 
 <head>
   <meta charset="utf-8">
@@ -73,9 +71,9 @@
   <script src="./app.js"></script>
   <script>
     var vidid = 'A9HV5O8Un6k';
-    var channel = 'demo'; // sessionStorage.room
-    //var user = sessionStorage.user; // set username
-    var user ="asdf" + Math.random().toString(); //remove
+    var channel = sessionStorage.room;
+    var user = sessionStorage.user; // set username
+    //var user ="asdf" + Math.random().toString(); //remove
 
     $('#toggledraw').click(function() {
       $('#url').hide();
@@ -177,7 +175,7 @@
       channel : channel,
       message : { 
         text: {
-          chat: 'hello!',
+          chat: 'Joined the Channel!',
           user: user
         }
       } 
@@ -188,7 +186,7 @@
       channel : channel,
         message : { 
           text: {
-            chat: 'goodbye!',
+            chat: 'Left the Channel.',
             user: user
           }
         } 

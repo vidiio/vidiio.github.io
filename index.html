@@ -30,13 +30,13 @@
     <form action="" method="POST">    
       <div class="row">
         <div class="column4">
-          <input type="text" class="large-fld" name="user" value="" placeholder="Username">
+          <input type="text" class="large-fld" name="user" id="user" value="" placeholder="Username" maxlength="10">
         </div>
         <div class="column5">
-          <input type="text" class="large-fld" name="room" value="" placeholder="Room Name">
+          <input type="text" class="large-fld" name="room" id="room" value="" placeholder="Room Name" maxlength="10">
         </div>
         <div class="column3">
-          <button type="submit" class="large-btn large-magnify"><a href = "portal.html">Get Started!</a></button>
+          <button type="button" id="submit" class="large-btn large-magnify">Get Started!</a></button>
         </div>
       </div>
     </form>
@@ -56,13 +56,19 @@
         var user = $('#user').val().trim();
         var room = $('#room').val().trim();
 
-        if ( user !== '' && room !== '' ) {
+        if ( user.length > 10 || room.length > 10 ) {
+          alert('Maximum length for Username and Room fields is 10. Please re-enter.');
+        }
+        else if ( /[^a-zA-Z0-9]/.test( user ) || /[^a-zA-Z0-9]/.test( room ) ) {
+          alert('Only alphanumeric characters may be used. Please re-enter.');
+        }
+        else if ( user == '' || room == '' ) {
+          alert('Please fill out all fields.');
+        }
+        else {
           sessionStorage.user = user;
           sessionStorage.room = room;
           window.location = 'http://vidiio.github.io/portal.html';
-        }
-        else {
-          alert('Please fill out all fields.');
         }
       });
     } else {
