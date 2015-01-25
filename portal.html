@@ -2,12 +2,12 @@
 <html data-ember-extension="1">
 <!--<![endif]-->
 
-<script type="text/javascript">
+<!--<script type="text/javascript">
   if (sessionStorage.getItem('room') === null || sessionStorage.getItem('user') === null)
   {
     window.location = 'http://vidiio.github.io/index.html';
   }
-</script>
+</script>-->
 
 <head>
   <meta charset="utf-8">
@@ -19,7 +19,18 @@
   <script type="text/javascript" async="" src="./assets/bf.min.js"></script>
   <script type="text/javascript" async="" src="./assets/ga.js"></script>
   <script src="./assets/30715011.js"></script>
-
+ <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script>
+$(function() {
+$( document ).tooltip();
+});
+</script>
+<style>
+label {
+display: inline-block;
+width: 5em;
+}
+</style>
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="portalstyles.css">
 
@@ -38,8 +49,8 @@
   <div id="vid_control">
     <div id="player1"></div>
     <input type="text" id="url" placeholder="video link" style="display:none;">
-    <button id="toggledraw"><img src="images/draw.png" height="40" width="40"></button>
-    <button id="toggleurl"><img src="images/link.png" height="40" width="40"></button>
+    <button id="toggledraw" title = "Toggle draw on/off"><img src="images/draw.png" height="40" width="40"></button>
+    <button id="toggleurl" title = "Enter URL to change video"><img src="images/link.png" height="40" width="40"></button>
   </div>
 
   <div id="img_control" style="display: none;">
@@ -63,7 +74,7 @@
       <input type="radio" name="color" id="color04" data-color="yellowgreen"> <label for="color04"></label>  
       <input type="radio" name="color" id="color05" data-color="firebrick"> <label for="color05"></label>  
       <input type="radio" name="color" id="color06" data-color="powderblue">  <label for="color06"></label>
-      <button id="clear"><img src="images/x.png" height="40" width="40"></button>
+      <button id="clear"><img src="images/x.png" height="40" width="40" title = "Clear all drawings"></button>
     </section>
   </section>
 
