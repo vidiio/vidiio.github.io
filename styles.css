@@ -123,6 +123,8 @@ header {
     color:#fff;
     cursor:pointer;
     height: 58px;
+    transition: .5s ease-in-out;
+    -webkit-transition: .5s ease-in-out;
 }
 .large-btn a {
     color:white;
@@ -317,4 +319,30 @@ section h3 {
 }
 #browserwrap img{
     width: 475px;
+}
+
+footer {
+    padding: 50px;
+    text-align: center;
+    background: rgb(52, 73, 94);
+}
+footer p {
+    color: white;
+    font-size: 20px;
+}
+footer a {
+    color: rgb(132, 189, 247);
+    text-decoration: none;
+    border-bottom: none;
+}
+footer a:hover {
+    border-bottom: 2px dotted rgb(132, 189, 247);
+}
+section a {
+    color: #ce1126;
+    text-decoration: none;
+    border-bottom: none;
+}
+section a:hover {
+    border-bottom: 2px dotted #ce1126;
 }
