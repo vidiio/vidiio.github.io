@@ -286,3 +286,35 @@ p#home-info span {
 .panel2container p {
     float:right;
 }
+
+section {
+    padding: 100px;
+}
+section h2 {
+    color: #22222a;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    text-align: center;
+    font-size: 40px;
+}
+section h3 {
+    color: #8b99a5;
+    display: block;
+    font-weight: normal !important;
+    line-height: 1.45;
+    letter-spacing: normal;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+#browserwrap {
+    display: block;
+    margin: 0 auto;
+    width: 1000px;
+    margin-top: 100px;
+}
+#browserwrap img{
+    width: 475px;
+}
