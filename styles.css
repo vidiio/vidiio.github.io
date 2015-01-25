@@ -91,7 +91,7 @@ header {
 
 .large-fld, .large-btn {
     padding:15px;
-    border-radius: 8px;
+    border-radius: 6px;
     -moz-border-radius: 8px;
     font-size:1.5em;
     border: 1px solid #8e8e8e;
@@ -239,3 +239,32 @@ p#home-info span {
     background-color: #C266E0;/*light purple*/
     color:#3D003D; /*dark purple*/
     text-decoration: none;
+}
+.seperate {
+    height:0;
+    width:100%;
+    border:1px solid black;
+    opacity:0.4;
+}
+.panel1 {
+    height:750px;
+}
+.panel2 {
+    height:700px;
+    width:100%;
+}
+.panel2container{
+    margin:30px 20px;
+    -moz-column-count: 2;
+    -moz-column-size: 40%;
+    -moz-column-rule: 1px solid black;
+    -webkit-column-count: 2;
+    -webkit-column-size: 40%;
+    -webkit-column-rule: 1px solid black;
+}
+.panel2container h2 {
+    float:left;
+}
+.panel2container p {
+    float:right;
+}
