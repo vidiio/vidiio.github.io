@@ -3,7 +3,7 @@
 <!--<![endif]-->
 
 <script type="text/javascript">
-  if (sessionStorage.room == null || sessionStorage.user == null)
+  if (sessionStorage.getItem('room') === null || sessionStorage.getItem('user') === null)
   {
     window.location = 'http://vidiio.github.io/index.html';
   }
