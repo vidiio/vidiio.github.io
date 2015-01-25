@@ -1,3 +1,13 @@
+@font-face {
+    font-family: sourcesans;
+    src: url('fonts/sourcesans.otf');
+}
+.sourcesans{
+    font-family: sourcesans, Arial;
+}
+.blockingcontainter{
+    z-index:30px ;
+}
 body {
     background-color: 
 }
@@ -17,7 +27,7 @@ body {
 }
 
 #title {
-    font-family: 'Pathway Gothic One', sans-serif;
+    font-family: 'sourcesans', sans-serif;
     font-size: 100px;
 }
 
@@ -29,3 +39,203 @@ a #title:hover {
     text-decoration: underline;
     font-weight: 700;
 }
+/*header*/
+
+/* GLOBAL CSS */
+
+a { color:#555555;}
+p { font-size:1.1em; }
+.alert {
+    text-align:center;
+    font-weight:bold;
+    margin:30px 0;
+    background-color:yellow;
+    padding:10px;
+}
+
+/* STEP 1 / 2 CSS */
+
+#header-nav img {
+    float:right;
+}
+
+.al {
+    float:left !important;
+}
+
+header ul {
+    float:right;
+    list-style-type:none;
+}
+
+header ul li {
+    display:inline;
+    float:left;
+    margin: 12px 15px 0 0;
+}
+
+.important-link a {
+    text-decoration:none;
+    color:#6aa33b;
+}
+
+header {
+    padding: 30px 0;
+}
+
+#home {
+    margin: 280px 0 40px 0;
+    font-size:2.4em;
+    text-align:center;
+}
+
+.large-fld, .large-btn {
+    padding:15px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    font-size:1.5em;
+    border: 1px solid #8e8e8e;
+    width:95%;
+    margin-left: 20px;
+}
+
+.large-btn {
+    background-color:#A2778D;
+    border:none;
+    color:#fff;
+    cursor:pointer;
+    height: 58px;
+}
+.large-btn a {
+    color:white;
+    text-decoration: none;
+}
+.large-btn:hover {
+    background-color:#715363; /*bland purple*/
+}
+
+p#home-info {
+    margin-top:100px;
+    text-align:center;
+}
+
+p#home-info span {
+    color:#4a7f1d;
+}
+
+
+/* MAIN GUI CSS */ 
+
+.sub-menu {
+    background:#2a2a2a;
+    padding:15px 0;
+}
+
+.small-fld, .small-btn, button {
+    padding:8px;
+    width:auto;
+    font-size:1em;
+    border-radius:8px;
+    -moz-border-radius:8px;
+    border:none;
+}
+
+.small-fld {
+    width:100%;
+}
+
+.small-btn, button {
+    background:#7cc142;
+    padding: 8px 23px;
+    color:#fff;
+    font-size:1em;
+    cursor:pointer;
+}
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+}
+
+@media only screen and (max-width: 767px) {
+
+    #header-nav img {
+        float:none;
+    }
+
+    header {
+        text-align:center;
+    }
+
+    h1#home {
+        margin: 20px 0 40px 0;
+        font-size:2em;
+    }
+
+    p#home-info {
+        margin-top:40px;
+    }
+
+}
+/*heading*/
+.header {
+    width:100%;
+    margin: 0px auto;
+    background-color: #4C4C4C;
+    position:absolute;
+    opacity:0.5;
+    z-index: 10;
+}
+.header-content {
+    width: 85%;
+    margin: 0px auto;
+    opacity: 1;
+}
+/*.header-break {
+    width:100%;
+    height:0;
+    border: 1px solid black;
+}*/
+.logo-button{
+    float:left;
+    vertical-align: middle;
+}
+.logo-button a {
+    padding:0px !important;
+}
+.logo {
+    height: 72px;
+    width:auto;
+    display:inline;
+    margin-top: 10px;
+    opacity: 1;
+}
+.nav {
+    display:block;
+    margin: 0px auto;
+    position:relative;
+    margin-top: 30;
+    opacity:1;
+}
+.nav ul {
+    font-family: serif;
+    margin: 0;
+    padding: 0;
+}
+.nav ul li{
+    list-style: none;
+    vertical-align: middle;
+    opacity:1;
+}
+.nav ul li a{
+    text-decoration: none;
+    float:right;
+    padding: 33px 20px;
+    color: white;
+    margin: 0px auto;
+    vertical-align: middle;
+    opacity:1;
+    font-size:16px;
+}
+.nav ul li a:hover{
+    background-color: #C266E0;/*light purple*/
+    color:#3D003D; /*dark purple*/
+    text-decoration: none;
