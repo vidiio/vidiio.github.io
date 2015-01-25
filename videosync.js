@@ -78,16 +78,14 @@ function VideoSync(roomId, userId) {
                             }
                         });
                     } else if (m.type === "pause") {
-                        if (m.videoId !== vidid)
-                        {
+                        if (m.videoId !== vidid) {
                             player.loadVideoById(m.videoId);
                         }
                         player.seekTo(m.time, true);
                         time = m.time;
                         player.pauseVideo();
                     } else if (m.type === "play") {
-                        if (m.videoId !== vidid)
-                        {
+                        if (m.videoId !== vidid) {
                             player.loadVideoById(m.videoId);
                         }
                         if (m.time !== null) {
@@ -105,9 +103,12 @@ function VideoSync(roomId, userId) {
         var z = setInterval(function () {
             var curTime = player.getCurrentTime();
             var curState = player.getPlayerState();
+            var url = player.getVideoUrl().match(/[?&]v=([^&]+)/);
+            var vidid = url[1];
+
             if (Math.abs(curTime - time) > 1) {
                 if (curState === 2) {
-                    pub("pause", curTime);
+                    pub("pause", curTime, vidid);
                     player.pauseVideo();
                 } else if (curState === 1) {
                     player.pauseVideo();

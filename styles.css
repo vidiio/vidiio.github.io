@@ -5,6 +5,9 @@
 .sourcesans{
     font-family: sourcesans, Arial;
 }
+.blockingcontainter{
+    z-index:30px ;
+}
 body {
     background-color: 
 }
@@ -24,7 +27,7 @@ body {
 }
 
 #title {
-    font-family: 'Pathway Gothic One', sans-serif;
+    font-family: 'sourcesans', sans-serif;
     font-size: 100px;
 }
 
@@ -81,7 +84,7 @@ header {
 }
 
 #home {
-    margin: 120px 0 40px 0;
+    margin: 280px 0 40px 0;
     font-size:2.4em;
     text-align:center;
 }
@@ -101,10 +104,14 @@ header {
     border:none;
     color:#fff;
     cursor:pointer;
+    height: 58px;
 }
-
+.large-btn a {
+    color:white;
+    text-decoration: none;
+}
 .large-btn:hover {
-    background-color:#715363;
+    background-color:#715363; /*bland purple*/
 }
 
 p#home-info {
@@ -144,76 +151,6 @@ p#home-info span {
     font-size:1em;
     cursor:pointer;
 }
-.gray-txt {
-    color:#767676;
-}
-.ignore-section {
-    margin-top:13px;
-}
-
-.gray-container {
-    background-color:#ededed;
-    padding: 60px 0;
-}
-
-.main-titles {
-    font-size:1.7em;
-    margin-bottom: 40px;
-    text-indent: 35px;
-}
-
-.main-titles strong {
-    font-weight:700;
-}
-
-.main-titles span {
-    color:#7e7e7e;
-}
-
-#full {
-    background:url(../images/full.png) no-repeat 0 5px;
-}
-#half {
-    background:url(../images/half.png) no-repeat 0 5px;
-    margin-top:50px;
-}
-
-.barter-container {
-    border: 1px solid #d0d0d0;
-    background:#fff;
-}
-
-.contact-container {
-    background:#e2e2e2;
-    padding:10px;
-}
-
-p.wantsoffers {
-    margin: 17px;
-    font-weight:bold;
-}
-
-p.wantsoffers span {
-    text-transform:uppercase;
-    display:block;
-    font-size:.9em;
-    line-height: 17px;
-    margin-top: 6px;
-}
-
-button { width: 100%; }
-
-button:hover, .small-btn:hover {
-    background: #609f2c;
-}
-
-.barter-data {
-    text-transform:uppercase;
-    color:#999999;
-    font-size:.9em;
-    margin: 6px 0;
-}
-
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 
 }
@@ -238,12 +175,14 @@ button:hover, .small-btn:hover {
     }
 
 }
+/*heading*/
 .header {
     width:100%;
     margin: 0px auto;
     background-color: #4C4C4C;
     position:absolute;
     opacity:0.5;
+    z-index: 10;
 }
 .header-content {
     width: 85%;
@@ -289,16 +228,14 @@ button:hover, .small-btn:hover {
 .nav ul li a{
     text-decoration: none;
     float:right;
-    padding: 30px 20px;
+    padding: 33px 20px;
     color: white;
     margin: 0px auto;
     vertical-align: middle;
     opacity:1;
     font-size:16px;
-    font-family: Blackjack;
 }
 .nav ul li a:hover{
-    background-color: #47B224;/*light green*/
-    color:#291400;
+    background-color: #C266E0;/*light purple*/
+    color:#3D003D; /*dark purple*/
     text-decoration: none;
-    font-family: Blackjack;

@@ -11,40 +11,6 @@
         <link rel = "stylesheet" type = "text/css" href = "1140.css"/>
         <link rel = "stylesheet" type = "text/css" href = "styles.css"/>
     </head>
-<!--<body>
-  <div class="container12">
-        <header>
-      <div class="row">
-        <div class="column7" id="header-nav">
-          <a href="vidiio.github.io"></a>
-        </div>
-        <div class="column5">
-          <ul>     
-            <li class="important-link"><a href="#">Login</a></li>
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Logout</a></li>          
-          </ul>
-        </div>
-      </div>
-    </header>
-    <h1 id="home">EXPIERENCE VIDEO COLLABORATION IN REAL TIME</h1>
-    <form action="homeform">
-      <div class="row">
-        <div class="userfield">
-          <input type="text" class="field" name="user" value="" placeholder="Username">
-        </div>
-        <div class="roomfield">
-          <input type="text" class="field" name="room" value="" placeholder="Room name">
-        </div>
-        <div class="getstartedbtn">
-          <input type="submit" class="btn large-magnify" name="step1" value="Get Started!">
-        </div>
-      </div>
-    </form>
-    <p id=""></p>
-  </div>
-
-</body>-->
 <body class = "sourcesans">
   <div class = "header">
         <div class = "header-content">
@@ -59,20 +25,7 @@
           </div>
         </div>
      </div>
-  <div class="container12">
-        <header>
-      <div class="row">
-        <div class="column7" id="header-nav">
-          <a href="vidiio.github.io"></a>
-        </div>
-        <div class="column5">
-          <ul>
-           <li class = "sourcesans"><a href="#">My Account</a></li>
-            <li class = "sourcesans"><a href="#">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+  <div class="container12 blockingcontainter">
     <h1 class = "sourcesans" id="home">Experience real time video collaboration</h1>
     <form action="" method="POST">    
       <div class="row">
@@ -83,11 +36,31 @@
           <input type="text" class="large-fld" name="room" value="" placeholder="Room Name">
         </div>
         <div class="column3">
-          <input type="submit" class="large-btn large-magnify" name="step1" value="Get Started!">
+          <button type="submit" class="large-btn large-magnify"><a href = "portal.html">Get Started!</a></button>
         </div>
       </div>
     </form>
     <p id="home-info"></p>
   </div>
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript">
+    if(typeof(Storage) !== "undefined") {
+      $('#submit').click(function() {
+        var user = $('#user').val().trim();
+        var room = $('#room').val().trim();
+
+        if ( user !== '' && room !== '' ) {
+          sessionStorage.user = user;
+          sessionStorage.room = room;
+          window.location = 'http://vidiio.github.io/portal.html';
+        }
+        else {
+          alert('Please fill out all fields.');
+        }
+      });
+    } else {
+      alert("Sorry, your browser does not support web storage...");
+    }
+  </script>
 </body>
 </html>
