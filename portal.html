@@ -15,11 +15,25 @@
 </head>
 
 <body id="app" class="satemplate" data-ember-extension="1">
-  <div id="player1"></div>
+  <button id="tab_vid" disabled>Video</button>
+  <button id="tab_img">Image</button>
 
-  <input type="text" id="url">
+  <div id="vid_control">
+    <div id="player1"></div>
+    <input type="text" id="url" placeholder="video link">
+    <button id="toggledraw">Toggle Draw</button>
+  </div>
 
-  <section id="main">
+  <div id="img_control" style="display: none;">
+    <input type="text" id="imglink" placeholder="image link">
+  </div>
+
+  <h2>Enter Chat and Press Enter</h2>
+  <div><input id='input' placeholder='you-chat-here' /></div> 
+  <h2>Chat Output</h2>
+  <div id='box'></div>
+
+  <section id="main" style="display:none;">
     <canvas id="drawCanvas" width="300" height="300">Canvas is not supported on this browser!</canvas>
 
     <section id="colorSwatch">
@@ -40,6 +54,24 @@
   <script src="./app.js"></script>
   <script>
     var vidid = 'A9HV5O8Un6k';
+
+    $('#toggledraw').click(function() {
+      $('#main').toggle();
+    });
+    $('#tab_vid').click(function() {
+      $('#img_control').hide();
+      $('#vid_control').show();
+      $(this).prop('disabled', true);
+      $('#tab_img').prop('disabled', false);
+      $('#main').hide();
+    });
+    $('#tab_img').click(function() {
+      $('#vid_control').hide();
+      $('#img_control').show();
+      $(this).prop('disabled', true);
+      $('#tab_vid').prop('disabled', false);
+      $('#main').show();
+    });
 
     $('#url').focus(function() {
       player1.pauseVideo();
@@ -89,6 +121,53 @@
       publish_key: 'pub-c-8ca801fc-d70a-4a96-b09a-250ca597a6e9',
       subscribe_key: 'sub-c-09c251d0-a40f-11e4-a3fb-0619f8945a4f',
       uuid: user
+    });
+
+    (function(){
+      var box = PUBNUB.$('box');
+      var input = PUBNUB.$('input');
+      var channel = 'demo';
+
+      PUBNUB.subscribe({
+        channel  : channel,
+        callback : function(m) { 
+          box.innerHTML = ('' + m.text.user + ": " + m.text.chat).replace( /[<>]/g, '' ) + '<br>' + box.innerHTML 
+        }
+      });
+      PUBNUB.bind( 'keyup', input, function(e) {
+        (e.keyCode || e.charCode) === 13 && PUBNUB.publish({
+            channel : channel, 
+            message : { 
+              text: {
+                chat: input.value,
+                user: user
+              }
+            }, 
+            x : (input.value='')
+        })
+      } )
+    })();
+
+    PUBNUB.publish({ 
+      channel : 'demo',
+      message : { 
+        text: {
+          chat: 'hello!',
+          user: user
+        }
+      } 
+    })
+
+    $(window).on('beforeunload', function(){
+      PUBNUB.publish({ 
+      channel : 'demo',
+        message : { 
+          text: {
+            chat: 'goodbye!',
+            user: user
+          }
+        } 
+      })
     });
   </script>
 </body>
