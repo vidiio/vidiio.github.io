@@ -32,7 +32,7 @@
 
 	/* PubNub */
 
-	var channel = 'demo';
+	var channel = 'demo'; // update channel
 
 	var pubnub = PUBNUB.init({
 		publish_key     : 'pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695',
@@ -42,7 +42,13 @@
 
 	pubnub.subscribe({
 		channel: channel,
-		callback: drawFromStream
+		callback: drawFromStream,
+		presence: function(m){
+			if(m.occupancy > 1){
+				document.getElementById('unit').textContent = 'doodlers';
+			}
+   			document.getElementById('occupancy').textContent = m.occupancy;
+   		}
 	});
 
 	function publish(data) {
@@ -108,7 +114,7 @@
 			drawOnCanvas(message.draw.color, message.draw.plots);
 		}
     }
-    
+
     var isActive = false;
     var plots = [];
 

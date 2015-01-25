@@ -2,6 +2,15 @@
 <html data-ember-extension="1">
 <!--<![endif]-->
 
+<!--
+<script type="text/javascript">
+  if (sessionStorage.room == null || sessionStorage.user == null)
+  {
+    window.location = 'http://vidiio.github.io/index.html';
+  }
+</script>
+-->
+
 <head>
   <meta charset="utf-8">
 
@@ -12,26 +21,36 @@
   <script type="text/javascript" async="" src="./assets/bf.min.js"></script>
   <script type="text/javascript" async="" src="./assets/ga.js"></script>
   <script src="./assets/30715011.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="portalstyles.css">
 </head>
 
 <body id="app" class="satemplate" data-ember-extension="1">
-  <button id="tab_vid" disabled>Video</button>
-  <button id="tab_img">Image</button>
+  <div id="header">
+    <a href="index.html"><button id="back"><img src="images/back.png" height="40" width="40"></button></a>
+    <span id="title">insertitlehere</span>
+    <button id="tab_img">Image</button>
+    <button id="tab_vid" disabled>Video</button>
+  </div>
 
   <div id="vid_control">
     <div id="player1"></div>
-    <input type="text" id="url" placeholder="video link">
-    <button id="toggledraw">Toggle Draw</button>
+    <input type="text" id="url" placeholder="video link" style="display:none;">
+    <button id="toggledraw"><img src="images/draw.png" height="40" width="40"></button>
+    <button id="toggleurl"><img src="images/link.png" height="40" width="40"></button>
   </div>
 
   <div id="img_control" style="display: none;">
     <input type="text" id="imglink" placeholder="image link">
   </div>
 
-  <h2>Enter Chat and Press Enter</h2>
-  <div><input id='input' placeholder='you-chat-here' /></div> 
-  <h2>Chat Output</h2>
-  <div id='box'></div>
+  <div class="chat">
+    <div id='box'></div>
+    <div class="messagebox">
+      <textarea id='input' placeholder='Chat.'></textarea>
+    </div>
+  </div>
 
   <section id="main" style="display:none;">
     <canvas id="drawCanvas" width="300" height="300">Canvas is not supported on this browser!</canvas>
@@ -43,7 +62,7 @@
       <input type="radio" name="color" id="color04" data-color="yellowgreen"> <label for="color04"></label>  
       <input type="radio" name="color" id="color05" data-color="firebrick"> <label for="color05"></label>  
       <input type="radio" name="color" id="color06" data-color="powderblue">  <label for="color06"></label>
-      <input type="button" value="clear" id="clear">
+      <button id="clear"><img src="images/x.png" height="40" width="40"></button>
     </section>
   </section>
 
@@ -54,23 +73,33 @@
   <script src="./app.js"></script>
   <script>
     var vidid = 'A9HV5O8Un6k';
+    var channel = 'demo'; // sessionStorage.room
+    //var user = sessionStorage.user; // set username
+    var user ="asdf" + Math.random().toString(); //remove
 
     $('#toggledraw').click(function() {
-      $('#main').toggle();
+      $('#url').hide();
+      $('#main').fadeToggle();
+    });
+    $('#toggleurl').click(function() {
+      $('#main').hide();
+      $('#url').fadeToggle();
     });
     $('#tab_vid').click(function() {
       $('#img_control').hide();
-      $('#vid_control').show();
+      $('#vid_control').fadeIn();
       $(this).prop('disabled', true);
       $('#tab_img').prop('disabled', false);
       $('#main').hide();
+      document.getElementById('colorSwatch').style.left="150px";
     });
     $('#tab_img').click(function() {
       $('#vid_control').hide();
-      $('#img_control').show();
+      $('#img_control').fadeIn();
       $(this).prop('disabled', true);
       $('#tab_vid').prop('disabled', false);
-      $('#main').show();
+      $('#main').fadeIn();
+      document.getElementById('colorSwatch').style.left="25px";
     });
 
     $('#url').focus(function() {
@@ -98,10 +127,7 @@
       fs: 0
     };
 
-    //var user = sessionStorage.user; // set username
-    var user ="asdf" + Math.random().toString();
-    //var vidSync1 = new VideoSync(sessionStorage.room, user);
-    var vidSync1 = new VideoSync("demo", user);
+    var vidSync1 = new VideoSync(channel, user);
     var player1;
 
     function onYouTubeIframeAPIReady() {
@@ -126,12 +152,11 @@
     (function(){
       var box = PUBNUB.$('box');
       var input = PUBNUB.$('input');
-      var channel = 'demo';
 
       PUBNUB.subscribe({
         channel  : channel,
         callback : function(m) { 
-          box.innerHTML = ('' + m.text.user + ": " + m.text.chat).replace( /[<>]/g, '' ) + '<br>' + box.innerHTML 
+          box.innerHTML = box.innerHTML + ('<b>' + m.text.user + "</b>: " + m.text.chat) + '<br>'
         }
       });
       PUBNUB.bind( 'keyup', input, function(e) {
@@ -149,7 +174,7 @@
     })();
 
     PUBNUB.publish({ 
-      channel : 'demo',
+      channel : channel,
       message : { 
         text: {
           chat: 'hello!',
@@ -160,7 +185,7 @@
 
     $(window).on('beforeunload', function(){
       PUBNUB.publish({ 
-      channel : 'demo',
+      channel : channel,
         message : { 
           text: {
             chat: 'goodbye!',
