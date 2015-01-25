@@ -56,13 +56,29 @@
 
 	$('#clear').click(function() {
 		ctx.clearRect ( 0 , 0 , canvas.width, canvas.height );
+		var url = document.getElementById("drawCanvas").style.backgroundImage;
 		publish({
 	  		draw: {
 	  			color: 'clear',
-	  			plots: 'clear'
+	  			plots: 'clear',
+	  			background: url.substring(4, url.length-1)
 	  		}
 	  	});
 	});
+
+	$('#imglink').keypress(function(e) {
+      if(e.keyCode == 13) {
+        var url = $('#imglink').val().trim();
+        document.getElementById('drawCanvas').style.background="url('" + url + "') no-repeat";
+      }
+      publish({
+	  		draw: {
+	  			color: '',
+	  			plots: '',
+	  			background: url
+	  		}
+	  	});
+    });
 
     function drawOnCanvas(color, plots) {
     	ctx.strokeStyle = color;
@@ -76,7 +92,13 @@
     }
 
     function drawFromStream(message) {
-		if(!message || message.draw.plots.length < 1) {
+		if(!message) {
+			return;
+		}
+		if (message.draw.background !== document.getElementById("drawCanvas").style.backgroundImage ){
+			document.getElementById('drawCanvas').style.background="url('" + message.draw.background + "') no-repeat";
+		}
+		if (message.draw.plots.length < 1 || message.draw.color === '') {
 			return;
 		}
 		if (message.draw.color === 'clear') {
@@ -86,7 +108,7 @@
 			drawOnCanvas(message.draw.color, message.draw.plots);
 		}
     }
-
+    
     var isActive = false;
     var plots = [];
 
@@ -110,11 +132,13 @@
 	function endDraw(e) {
 	  	e.preventDefault();
 	  	isActive = false;
+		var url = document.getElementById("drawCanvas").style.backgroundImage;
 	  
 	  	publish({
 	  		draw: {
 	  			color: color,
-	  			plots: plots
+	  			plots: plots,
+	  			background: url.substring(4, url.length-1)
 	  		}
 	  	});
 
