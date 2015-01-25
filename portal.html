@@ -52,8 +52,8 @@
       fs: 0
     };
 
-    var user = "User" + Math.random().toString(); // set username
-    var vidSync1 = new VideoSync("demo", user);
+    var user = localstorage.user; // set username
+    var vidSync1 = new VideoSync(localstorage.room, user);
     var player1;
 
     function onYouTubeIframeAPIReady() {
@@ -76,7 +76,7 @@
     });
 
     pubnub.subscribe({
-      channel: "demo",
+      channel: localstorage.room,
       callback: consolePrint
     });
   </script>
