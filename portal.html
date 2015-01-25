@@ -27,6 +27,10 @@
   <script>
     var vidid = 'A9HV5O8Un6k';
 
+    $('#url').focus(function() {
+      player1.pauseVideo();
+    });
+
     $('#url').keypress(function(e) {
       if(e.keyCode == 13) {
         var match = $('#url').val().match(/[?&]v=([^&]+)/);
