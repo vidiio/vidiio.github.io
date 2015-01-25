@@ -19,6 +19,11 @@
 
   <input type="text" id="url">
 
+  <h2>Enter Chat and Press Enter</h2>
+  <div><input id='input' placeholder='you-chat-here' /></div> 
+  <h2>Chat Output</h2>
+  <div id='box'></div>
+
   <section id="main">
     <canvas id="drawCanvas" width="300" height="300">Canvas is not supported on this browser!</canvas>
 
@@ -89,6 +94,53 @@
       publish_key: 'pub-c-8ca801fc-d70a-4a96-b09a-250ca597a6e9',
       subscribe_key: 'sub-c-09c251d0-a40f-11e4-a3fb-0619f8945a4f',
       uuid: user
+    });
+
+    (function(){
+      var box = PUBNUB.$('box');
+      var input = PUBNUB.$('input');
+      var channel = 'demo';
+
+      PUBNUB.subscribe({
+        channel  : channel,
+        callback : function(m) { 
+          box.innerHTML = ('' + m.text.user + ": " + m.text.chat).replace( /[<>]/g, '' ) + '<br>' + box.innerHTML 
+        }
+      });
+      PUBNUB.bind( 'keyup', input, function(e) {
+        (e.keyCode || e.charCode) === 13 && PUBNUB.publish({
+            channel : channel, 
+            message : { 
+              text: {
+                chat: input.value,
+                user: user
+              }
+            }, 
+            x : (input.value='')
+        })
+      } )
+    })();
+
+    PUBNUB.publish({ 
+      channel : 'demo',
+      message : { 
+        text: {
+          chat: 'hello!',
+          user: user
+        }
+      } 
+    })
+
+    $(window).on('beforeunload', function(){
+      PUBNUB.publish({ 
+      channel : 'demo',
+        message : { 
+          text: {
+            chat: 'goodbye!',
+            user: user
+          }
+        } 
+      })
     });
   </script>
 </body>
